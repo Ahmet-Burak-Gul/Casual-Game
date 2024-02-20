@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BagControllar : MonoBehaviour
 {
+
+    [SerializeField] private Transform bagTransform;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +16,21 @@ public class BagControllar : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("other"))
+        {
+            AddProductToBag(other.gameObject);
+        }
+    }
+
+    public void AddProductToBag(GameObject Cube)
+    {
+        Cube.transform.SetParent(bagTransform, true);
+
+        Cube.transform.localPosition = Vector3.zero;
+        Cube.transform.localRotation = Quaternion.identity;
     }
 }
