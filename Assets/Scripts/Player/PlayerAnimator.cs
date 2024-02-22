@@ -18,7 +18,6 @@ public class PlayerAnimator : MonoBehaviour
         {
             PlayIdleAnimator();
         }
-;
     }
 
     void PlayRunAnimator()

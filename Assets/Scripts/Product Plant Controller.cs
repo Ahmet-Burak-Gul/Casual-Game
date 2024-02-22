@@ -7,6 +7,10 @@ public class ProductPlantController : MonoBehaviour
 {
     private bool isReadyToPick;
     private Vector3 originalScale;
+
+    [SerializeField] private ProductData productData;
+    private BagControllar bagController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +22,9 @@ public class ProductPlantController : MonoBehaviour
     {
         if (other.CompareTag("Player") && isReadyToPick)
         {
+            bagController = other.GetComponent<BagControllar>();
+            bagController.AddProductToBag(productData.productPrefab);
+
             isReadyToPick = false;
             StartCoroutine(ProductPicked());
         }
