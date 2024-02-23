@@ -23,10 +23,14 @@ public class ProductPlantController : MonoBehaviour
         if (other.CompareTag("Player") && isReadyToPick)
         {
             bagController = other.GetComponent<BagControllar>();
-            bagController.AddProductToBag(productData.productPrefab);
+            if (bagController.IsEmptySpace())
+            {
+                bagController.AddProductToBag(productData);
 
-            isReadyToPick = false;
-            StartCoroutine(ProductPicked());
+                isReadyToPick = false;
+                StartCoroutine(ProductPicked());
+            }
+
         }
     }
 
