@@ -6,6 +6,7 @@ TagManager:
   tags:
   - other
   - ShopPoint
+  - UnlockBakeryUnit
   layers:
   - Default
   - TransparentFX

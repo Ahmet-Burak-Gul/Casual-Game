@@ -22,12 +22,33 @@ public class BagControllar : MonoBehaviour
     {
         if (other.CompareTag("ShopPoint"))
         {
-            for (int i = productDataList.Count-1; i >= 0; i--)
+            for (int i = productDataList.Count - 1; i >= 0; i--)
             {
                 SellProductToShop(productDataList[i]);
                 Destroy(bagTransform.transform.GetChild(i).gameObject);
                 productDataList.RemoveAt(i);
             }
+            ControlBagCapacity();
+        }
+
+        if (other.CompareTag("UnlockBakeryUnit"))
+        {
+            UnlockedBakeryUnitController bakeryUnit = other.GetComponent<UnlockedBakeryUnitController>();
+
+            ProductType neededType = bakeryUnit.GetNeededProductType();
+            for (int i = productDataList.Count - 1; i >= 0; i--)
+            {
+                if (productDataList[i].productType == neededType)
+                {
+                    if (bakeryUnit.IsAvailable())
+                    {
+                        Destroy(bagTransform.GetChild(i).gameObject);
+                        productDataList.RemoveAt(i);
+                    }
+                }
+            }
+
+            StartCoroutine(PutProductIsOrder());
             ControlBagCapacity();
         }
     }
@@ -103,5 +124,15 @@ public class BagControllar : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private IEnumerator PutProductIsOrder()
+    {
+        yield return new WaitForSeconds(0.15f);
+        for (int i = 0; i < bagTransform.childCount; i++)
+        {
+            float newYPos = productSize.y * i;
+            bagTransform.GetChild(i).localPosition = new Vector3(0, newYPos, 0);
+        }
     }
 }

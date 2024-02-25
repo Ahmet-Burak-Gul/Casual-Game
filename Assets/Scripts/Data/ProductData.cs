@@ -8,6 +8,7 @@ public enum ProductType {tomato, cabbage };
 public class ProductData : ScriptableObject
 {
     public GameObject productPrefab;
-    public ProductType ProductType;
+    public ProductType productType;
     public int productPrice;
+    public float grownTime;
 }
