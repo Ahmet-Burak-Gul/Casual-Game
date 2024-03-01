@@ -7,6 +7,8 @@ public class CashManager : MonoBehaviour
     public static CashManager instance;
     private int coins = 0;
 
+    private string keyCoins = "keyCoins";
+
     private void Awake()
     {
         if (instance == null)
@@ -17,6 +19,12 @@ public class CashManager : MonoBehaviour
         {
             Destroy(instance);
         }
+    }
+
+    void Start()
+    {
+        LoadCash();
+        DisplayShow();
     }
 
     public bool TryBuyThisUnit(int price)
@@ -49,10 +57,21 @@ public class CashManager : MonoBehaviour
     public void DisplayShow()
     {
         UIManager.Instance.ShowCoinCountOnScreen(coins);
+        SaveCash();
     }
 
     public int GetCoins()
     {
         return coins;
+    }
+
+    private void SaveCash()
+    {
+        PlayerPrefs.SetInt(keyCoins, coins);
+    } 
+
+    private void LoadCash()
+    {
+        coins = PlayerPrefs.GetInt(keyCoins, 0);
     }
 }

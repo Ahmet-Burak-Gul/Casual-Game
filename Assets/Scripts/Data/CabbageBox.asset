@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   productPrefab: {fileID: 6819022083481003755, guid: 453b8f08804885b45a77329f1e2027b8, type: 3}
   productType: 1
-  productPrice: 1
+  productPrice: 3
+  grownTime: 3
