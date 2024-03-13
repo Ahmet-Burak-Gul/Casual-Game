@@ -8,14 +8,16 @@ public class BagControllar : MonoBehaviour
 
     [SerializeField] private Transform bagTransform;
     public List<ProductData> productDataList;
+
     [SerializeField] private TextMeshPro maxText;
     private int maxBagCapacity;
 
     private Vector3 productSize;
+    private string keyBagCapacity = "keyBagCapacity";
 
     private void Start()
     {
-        maxBagCapacity = 5;
+        maxBagCapacity = LoadBagCapacity();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,6 +40,7 @@ public class BagControllar : MonoBehaviour
 
             ProductType neededType = bakeryUnit.GetNeededProductType();
             PlayShopSound();
+
             for (int i = productDataList.Count - 1; i >= 0; i--)
             {
                 if (productDataList[i].productType == neededType)
@@ -144,5 +147,18 @@ public class BagControllar : MonoBehaviour
         {
             AudioManager.instance.PlayAudio(AudioClipType.shopClip);
         }
+    }
+
+    public void BoostBagCapacity(int boostCount)
+    {
+        maxBagCapacity += boostCount;
+        PlayerPrefs.SetInt(keyBagCapacity,maxBagCapacity);
+        ControlBagCapacity();
+    }
+
+    private int LoadBagCapacity()
+    {
+        int bagCapacity = PlayerPrefs.GetInt(keyBagCapacity,5);
+        return bagCapacity;
     }
 }

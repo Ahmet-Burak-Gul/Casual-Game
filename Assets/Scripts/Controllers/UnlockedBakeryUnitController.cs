@@ -17,12 +17,14 @@ public class UnlockedBakeryUnitController : MonoBehaviour
     private float time;
 
     [SerializeField] private ParticleSystem smokeParticle;
+
+    private string keyBakeryProdact = "keyBakeryProdact";
     void Start()
     {
+        storeProductCount = LoadProductInBakery();
         DisplayProductCount();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (storeProductCount > 0)
@@ -40,6 +42,7 @@ public class UnlockedBakeryUnitController : MonoBehaviour
     {
         bakeryText.text = storeProductCount.ToString() + "/" + maxStoreProductCount.ToString();
         ControlSmokeEffect();
+        SaveProductInbakery(storeProductCount);
     }
 
     public ProductType GetNeededProductType()
@@ -89,5 +92,16 @@ public class UnlockedBakeryUnitController : MonoBehaviour
                 smokeParticle.Play();
             }
         }
+    }
+
+    private void SaveProductInbakery(int prodactCount)
+    {
+        PlayerPrefs.SetInt(keyBakeryProdact, prodactCount);
+    }
+
+    private int LoadProductInBakery()
+    {
+        int productCount = PlayerPrefs.GetInt(keyBakeryProdact,0);
+        return productCount;
     }
 }
