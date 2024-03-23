@@ -1,4 +1,5 @@
 # Game video:
+The video is 2.5x accelerated below.
 ![Game video](https://github.com/Ahmet-Burak-Gul/Casual-Game/assets/124262349/38e57dd4-da8e-4994-9e2e-7a640bc1fcfa)  <br/>
 
 # Game Images:
