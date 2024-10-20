@@ -37,7 +37,7 @@ public class AudioManager : MonoBehaviour
                 audioClip = shopClip;
             }
 
-            audioSource.PlayOneShot(audioClip, 0.6f);
+            audioSource.PlayOneShot(audioClip, 0.3f);
         }
     }
 
